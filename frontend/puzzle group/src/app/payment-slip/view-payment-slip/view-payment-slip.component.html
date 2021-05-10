@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>Pregled Uplatnice</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="row" style="margin-top: 2em;">
+    <div class="col-xs-3">
+      <mat-icon>credit_card</mat-icon>
+
+    </div>
+    <div class="col-xs-1" style="margin-left: 2em;">
+    <mat-divider [vertical]="true" style="margin-left: 0; height: 300px;"></mat-divider>
+    </div>
+    <div class="col-xs-2" style="margin-left: 2em;">
+
+      <div class="row" style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Iznos</label>
+          <div>{{data?.iznos}}</div>
+        </fieldset>
+      </div>
+
+      <div class="row" style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Valuta</label>
+          <div>{{data?.valuta.nazivValute }}</div>
+        </fieldset>
+      </div>
+
+      <div class="row" style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Model</label>
+          <div>{{data?.model.opisModela }}</div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="col-xs-2" style="margin-left: 2em;">
+      <div class="row" style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Radnik</label>
+          <div>{{data?.radnik.imePrezime }}</div>
+        </fieldset>
+      </div>
+      <div class="row" style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Svrha uplate</label>
+          <div>{{data?.svrhaUplate }}</div>
+        </fieldset>
+      </div>
+      <div class="row" style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Broj profakture</label>
+          <div>{{data?.profaktura.brojProfakture}}</div>
+        </fieldset>
+      </div>
+    </div>
+
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="actions">
+  <button mat-button mat-dialog-close color="accent">Cancel</button>
+</mat-dialog-actions>

@@ -1,0 +1,107 @@
+<h2 mat-dialog-title>Pregled Profakture</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="row" style="margin-top: 2em;">
+    <div class="col-xs-3">
+      <mat-icon>event_note</mat-icon>
+    </div>
+
+    <div class="col-xs-1" style="margin-left: 2em;">
+      <mat-divider [vertical]="true" style="margin-left: 0; height: 300px;"></mat-divider>
+    </div>
+
+    <div class="col-xs-2" style="margin-left: 2em;">
+      <div class="row" style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Datum prometa</label>
+          <div>{{data?.datumPrometa | date}}</div>
+        </fieldset>
+      </div>
+      <div class="row" style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Datum izdavanja</label>
+          <div>{{data?.datumIzdavanja | date}}</div>
+        </fieldset>
+      </div>
+
+      <div class="row" style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Drzava</label>
+          <div>{{data?.drzava.naziv }}</div>
+        </fieldset>
+      </div>
+
+      <div class="row" style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Grad</label>
+          <div>{{data?.grad.naziv }}</div>
+        </fieldset>
+      </div>
+    </div>
+
+    <div class="col-xs-4" style="margin-left: 2em;">
+      <div class="row" style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Nacini placanja</label>
+          <div *ngFor="let nacin of data.nacinPlacanja">{{nacin.opisNacinaPlacanja}}</div>
+        </fieldset>
+      </div>
+      <div class="row" style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Poziv na broj</label>
+          <div>{{data?.pozivNaBroj }}</div>
+        </fieldset>
+      </div>
+      <div class="row" style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Radnik</label>
+          <div>{{data?.radnik.imePrezime }}</div>
+        </fieldset>
+      </div>
+      <div class="row" style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Ugovor</label>
+          <div>{{data?.ugovor.brojUgovora}}</div>
+        </fieldset>
+      </div>
+
+
+
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4"></div>
+    <div class="col-xs-6" style="margin-left: 2em;">
+      <label class="nt-subheader-clean">Stavke profakture</label>
+      <table>
+        <tr>
+          <th>Opis</th>
+          <th>Napomena</th>
+          <th>Cena</th>
+        </tr>
+
+          <tr *ngFor="let stavka of data.stavke">
+            <td>{{stavka.opis}}</td>
+            <td>{{stavka.napomena}}</td>
+            <td>{{stavka.cena}}</td>
+          </tr>
+      </table>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-xs-8"></div>
+    <div class="col-xs-2">
+      <div  style="margin-bottom: 1em;">
+        <fieldset class="form-group">
+          <label class="nt-subheader-clean">Ukupan iznos: &nbsp; &nbsp;&nbsp; </label>
+          <b>{{ data?.iznos }}</b>
+        </fieldset>
+      </div>
+
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="actions">
+  <button mat-button mat-dialog-close color="accent">Cancel</button>
+</mat-dialog-actions>

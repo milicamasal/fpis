@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-lg-10"></div>
+  <div class="col-lg-2">
+
+    <button mat-menu-item (click)="addProfaktura()">
+      <mat-icon> add_circle_outline</mat-icon>
+      <span>Dodaj profakturu</span>
+    </button>
+  </div>
+</div>
+<p-table [rowHover]="true" #dt1 [value]="profakture"
+         [paginator]="true"
+         [rows]="10"
+         (load)="loadProfakture()"
+         styleClass="p-datatable-striped"
+>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 50px">#</th>
+      <th [pSortableColumn]="'brojProfakture'">ID
+        <p-sortIcon [field]="'brojProfakture'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'datumIzdavanja'">Datum izdavanja
+        <p-sortIcon [field]="'datumIzdavanja'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'datumPrometa'">Datum prometa
+        <p-sortIcon [field]="'datumPrometa'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'radnik.imePrezime'">Radnik
+        <p-sortIcon [field]="'radnik.imePrezime'"></p-sortIcon>
+      </th>
+      <th></th>
+
+    </tr>
+
+    <tr>
+      <th></th>
+      <th class="pretrazi">
+        <input pInputText type="text" (input)="dt1.filter($event.target.value, 'brojProfakture', 'contains')"
+               [value]="dt1.filters['brojProfakture']?.value" placeholder="Pretraži brojProfakture"
+               class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" (input)="dt1.filter($event.target.value, 'datumIzdavanja', 'contains')"
+               [value]="dt1.filters['datumIzdavanja']?.value" placeholder="Pretraži datum izdavanja"
+               class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" (input)="dt1.filter($event.target.value, 'datumPrometa', 'contains')"
+               [value]="dt1.filters['datumPrometa']?.value" placeholder="Pretraži datum prometa"
+               class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" (input)="dt1.filter($event.target.value, 'radnik.imePrezime', 'contains')"
+               [value]="dt1.filters['radnik.imePrezime']?.value" placeholder="Pretraži radnika" class="p-column-filter">
+      </th>
+      <th style="width: 100px;"></th>
+
+    </tr>
+
+  </ng-template>
+  <ng-template pTemplate="body" let-profaktura let-i="rowIndex">
+    <tr>
+      <td>{{(i + 1)}}</td>
+      <td>{{(profaktura.brojProfakture)}}</td>
+      <td>{{profaktura.datumIzdavanja  | date}}</td>
+      <td>{{profaktura.datumPrometa  | date}}</td>
+      <td>{{profaktura.radnik.imePrezime}}</td>
+      <td>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editProfaktura(profaktura)">
+            <mat-icon>edit</mat-icon>
+            <span>Izmeni</span>
+          </button>
+          <button mat-menu-item (click)="viewProfaktura(profaktura)">
+            <mat-icon>remove_red_eye</mat-icon>
+            <span>Pogledaj</span>
+          </button>
+          <button mat-menu-item (click)="deleteProfaktura(profaktura)">
+            <mat-icon>delete</mat-icon>
+            <span>Obrisi</span>
+          </button>
+
+        </mat-menu>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

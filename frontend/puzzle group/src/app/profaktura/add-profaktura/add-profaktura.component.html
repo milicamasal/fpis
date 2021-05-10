@@ -1,0 +1,95 @@
+<mat-card><mat-card-title>Kreiranje profakture</mat-card-title>
+  <form [formGroup]="form" class="form">
+    <div class="row">
+      <div class="col-lg-10"></div>
+      <div class="col-lg-2">
+
+      <button mat-menu-item (click)="saveProfaktura()" [disabled]="!form.valid">
+      <mat-icon> save</mat-icon>
+      <span>Sacuvaj profakturu</span>
+    </button>
+      </div>
+    </div>
+  <mat-vertical-stepper [linear]="true" >
+  <mat-step  label="Detalji profakture">
+
+<br>
+      <mat-form-field appearance="fill">
+        <mat-label>Datum izdavanja</mat-label>
+        <input matInput [formControlName]="'datumIzdavanja'"  [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Datum prometa</mat-label>
+        <input  matInput [formControlName]="'datumPrometa'"   [matDatepicker]="picker1">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker  #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Ugovor</mat-label>
+        <mat-select  [compareWith]="compareFunctionUgovor" [formControlName]="'ugovor'">
+          <mat-option *ngFor="let ugovor of ugovori" [value]=ugovor>
+            {{ugovor.brojUgovora}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Radnik</mat-label>
+        <mat-select  [compareWith]="compareFunctionRadnik" [formControlName]="'radnik'">
+          <mat-option *ngFor="let radnik of radnici" [value]=radnik>
+            {{radnik.imePrezime}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nacini placanja</mat-label>
+        <mat-select  [compareWith]="compareFunctionNaciniPlacanja" [formControlName]="'naciniPlacanja'" multiple>
+          <mat-option *ngFor="let nacinPlacanja of naciniPlacanja" [value]=nacinPlacanja>
+            {{nacinPlacanja.opisNacinaPlacanja}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+        <mat-form-field class="form-element" [appearance]="'outline'" color="accent">
+          <mat-label>Poziv na broj</mat-label>
+          <input type="number" matInput formControlName="pozivNaBroj" placeholder="Poziv na broj">
+        </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Drzava</mat-label>
+      <mat-select  [compareWith]="compareFunctionDrzava"  [formControlName]="'drzava'">
+        <mat-option (click)="setSelectedDrzava(drzava, true)" *ngFor="let drzava of drzave" [value]=drzava>
+          {{drzava.naziv}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="isDrzavaSet" appearance="fill">
+      <mat-label>Grad</mat-label>
+      <mat-select   [compareWith]="compareFunctionGrad" [formControlName]="'grad'">
+        <mat-option *ngFor="let grad of gradovi" [value]=grad>
+          {{grad.naziv}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </mat-step>
+  <mat-step label="Stavke profakture">
+    <app-stavka-profakture></app-stavka-profakture>
+    <div style="float: right">
+    <mat-label>Ukupan Iznos:</mat-label>
+
+    <mat-form-field class="form-element" [appearance]="'fill'" color="accent">
+      <input  matInput formControlName="iznos"  >
+    </mat-form-field>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>
+  </form>
+
+</mat-card>

@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="col-lg-10"></div>
+  <div class="col-lg-2">
+
+    <button mat-menu-item (click)="addUplatnica()">
+      <mat-icon> add_circle_outline</mat-icon>
+      <span>Dodaj uplatnicu</span>
+    </button>
+  </div>
+</div>
+<p-table [rowHover]="true" #dt1 [value]="uplatnice"
+         [paginator]="true"
+         [showCurrentPageReport]="true"
+         [rows]="10"
+         (load)="loadUplatnice()"
+         styleClass="p-datatable-striped"
+>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 50px">#</th>
+      <th [pSortableColumn]="'idUplatnice'">ID
+        <p-sortIcon [field]="'idUplatnice'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'iznos'">Iznos
+        <p-sortIcon [field]="'iznos'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'svrhaUplate'">Svrha uplate
+        <p-sortIcon [field]="'svrhaUplate'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'model.opisModela'">Model
+        <p-sortIcon [field]="'model.opisModela'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'profaktura.brojProfakture'">brProfakture
+        <p-sortIcon [field]="'profaktura.brojProfakture'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'radnik.imePrezime'">Sifra Radnika
+        <p-sortIcon [field]="'radnik.imePrezime'"></p-sortIcon>
+      </th>
+      <th [pSortableColumn]="'valuta.nazivValute'">Valuta
+        <p-sortIcon [field]="'valuta.nazivValute'"></p-sortIcon>
+      </th>
+      <th style="width: 100px;"></th>
+    </tr>
+
+    <tr class="pretrazi">
+      <th></th>
+      <th>
+        <input pInputText type="text" (input)="dt1.filter($event.target.value, 'idUplatnice', 'contains')"
+               [value]="dt1.filters['idUplatnice']?.value" placeholder="Pretraži idUplatnice" class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" (input)="dt1.filter($event.target.value, 'iznos', 'contains')"
+               [value]="dt1.filters['iznos']?.value" placeholder="Pretraži iznos" class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" (input)="dt1.filter($event.target.value, 'svrhaUplate', 'contains')"
+               [value]="dt1.filters['svrhaUplate']?.value" placeholder="Pretraži svrhu uplate" class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" (input)="dt1.filter($event.target.value, 'model.opisModela', 'contains')"
+               [value]="dt1.filters['model.opisModela']?.value" placeholder="Pretraži model" class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" (input)="dt1.filter($event.target.value, 'profaktura.brojProfakture', 'contains')"
+               [value]="dt1.filters['profaktura.brojProfakture']?.value" placeholder="Pretraži profakturu"
+               class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" (input)="dt1.filter($event.target.value, 'radnik.sifraRadnika', 'contains')"
+               [value]="dt1.filters['radnik.sifraRadnika']?.value" placeholder="Pretraži radnika"
+               class="p-column-filter">
+      </th>
+      <th>
+        <input pInputText type="text" (input)="dt1.filter($event.target.value, 'valuta.nazivValute', 'contains')"
+               [value]="dt1.filters['valuta.nazivValute']?.value" placeholder="Pretraži valutu" class="p-column-filter">
+      </th>
+      <th></th>
+    </tr>
+
+  </ng-template>
+  <ng-template pTemplate="body" let-uplatnica let-i="rowIndex">
+    <tr>
+      <td>{{(i + 1)}}</td>
+      <td>{{(uplatnica.idUplatnice)}}</td>
+      <td>{{uplatnica.iznos}}</td>
+      <td>{{uplatnica.svrhaUplate}}</td>
+      <td>{{uplatnica.model.opisModela}}</td>
+      <td>{{uplatnica.profaktura.brojProfakture}}</td>
+      <td>{{uplatnica.radnik.imePrezime}}</td>
+      <td>{{uplatnica.valuta.nazivValute}}</td>
+      <td>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editUplatnica(uplatnica)">
+            <mat-icon>edit</mat-icon>
+            <span>Izmeni</span>
+          </button>
+          <button mat-menu-item (click)="viewUplatnica(uplatnica)">
+            <mat-icon>remove_red_eye</mat-icon>
+            <span>Pogledaj</span>
+          </button>
+          <button mat-menu-item (click)="deleteUplatnica(uplatnica)">
+            <mat-icon>delete</mat-icon>
+            <span>Obrisi</span>
+          </button>
+        </mat-menu>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
